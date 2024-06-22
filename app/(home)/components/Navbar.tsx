@@ -29,7 +29,7 @@ export default function Navbar() {
                     const Icon = social.Icon;
                     return (
                         <a href={social.link} key={index} aria-label={social.label} target="_blank" rel="noopener noreferrer">
-                            <Icon className="w-5 h-5 hover:scale-150 transition-all"/>
+                            <Icon className="w-5 h-5 hover:scale-150 transition-all hover:text-red-300"/>
                         </a>
                     );
                 })}
