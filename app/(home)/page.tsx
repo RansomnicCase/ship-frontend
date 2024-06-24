@@ -26,7 +26,7 @@ export default function page() {
       </div>
       
       
-      <div className="p-20 py-1 flex justify-between items-center flex-col-reverse gap-20 lg:gap-0 lg:flex-row  min-h-[50vh]">
+      <div className="p-20 py-1 flex justify-evenly items-center flex-col-reverse gap-10 lg:gap-0 lg:flex-row  min-h-[50vh]">
       <ThreeDCardDemo/>
       <ThreeDCardDemo2/>
       <ThreeDCardDemo3/>
