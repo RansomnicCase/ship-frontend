@@ -20,7 +20,7 @@ export default function page() {
       
       <div>
       <div>
-      <h1 className="flex text-xl lg:text-2xl text-center lg:text-left p-20 py-10 font-bold underline underline-offset-4 decoration-red-300">Some of what I write</h1>
+      <h1 className="flex text-xl lg:text-2xl text-center justify-center lg:justify-start lg:text-left p-20 py-10 font-bold underline underline-offset-4 decoration-red-300">Some of what I write</h1>
       </div>
       
       </div>
