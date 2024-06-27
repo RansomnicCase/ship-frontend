@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import { AuroraBackground } from "./home/components/ui/aurora-background";
 import { useRouter } from "next/navigation";
+import {LinkPreview} from "./home/components/ui/link-preview";
 
 export default function LandingPage(): React.JSX.Element {
   const router = useRouter();
@@ -32,12 +33,16 @@ export default function LandingPage(): React.JSX.Element {
         <div className="font-extralight text-base md:text-4xl dark:text-neutral-200 py-4">
           Haha, NO.
         </div>
-        <button
-          className="bg-black dark:bg-white rounded-full w-fit text-white dark:text-black px-4 py-2"
-          onClick={handleClick}
-        >
-          Me, deepdive.
-        </button>
+        <br />
+        <br />
+        
+        
+        <LinkPreview url="https://cannizzaro.vercel.app/home" className="font-bold lg:text-2xl text-gray-700">
+          get to know me
+        </LinkPreview>
+          
+          
+        
       </motion.div>
     </AuroraBackground>
   );
