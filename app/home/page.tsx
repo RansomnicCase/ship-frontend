@@ -3,12 +3,17 @@ import React from 'react'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import { ThreeDCardDemo } from './components/ui/3d-card'
-
+import { useRouter } from "next/navigation";
 import { ThreeDCardDemo2 } from './components/ui/3d-card2'
 import { ThreeDCardDemo3 } from './components/ui/3d-card3'
 
 
-export default function page() {
+export default function Page(): React.JSX.Element {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push("/waitlist");
+  };
   return (
     <div className="min-h-screen bg-black overflow-hidden dark:bg-black  dark:bg-grid-white/[0.05] bg-grid-black/[0.2]">
       
@@ -33,6 +38,18 @@ export default function page() {
       <ThreeDCardDemo3/>
       
       </div>
+      <br />
+      <br />
+
+      <div className="flex justify-center items-center">
+      <button
+          className="bg-black dark:bg-black rounded-full w-fit text-black dark:text-white px-4 py-2 size-15"
+          onClick={handleClick}
+        >
+          Join the waitlist
+      </button>
+      </div>
+      <br />
 
       
      
