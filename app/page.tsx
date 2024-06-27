@@ -2,14 +2,14 @@
 
 import { motion } from "framer-motion";
 import React from "react";
-import { AuroraBackground } from "./(home)/components/ui/aurora-background";// Adjust the import path if necessary
+import { AuroraBackground } from "./home/components/ui/aurora-background";
 import { useRouter } from "next/navigation";
 
-export default function LandingPage() {
+export default function LandingPage(): React.JSX.Element {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push("/(home)");
+    router.push("/home");
   };
 
   return (
