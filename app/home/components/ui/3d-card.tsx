@@ -165,7 +165,7 @@ export function ThreeDCardDemo() {
             translateZ="50"
             className="text-xl font-bold text-neutral-600 dark:text-white"
           >
-            The chinese restaurent
+            The chinese restaurant
           </CardItem>
           <CardItem
             as="p"
