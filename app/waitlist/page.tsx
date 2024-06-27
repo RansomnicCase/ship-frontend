@@ -1,8 +1,32 @@
 "use client";
-import React from "react";
+
+import React, { useState, FormEvent } from 'react';
 import { BackgroundBeams } from "./components/ui/background-beams";
 
 export default function Waitlist() {
+
+const [email, setEmail] = useState<string>('');
+  const [message, setMessage] = useState<string>('');
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch('/api/join-waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const result = await response.json();
+      setMessage(result.message);
+    } catch (error) {
+      console.error('Error:', error);
+      setMessage('An error occurred');
+    }
+  };
   return (
     
     <div className="h-[60rem] w-full rounded-md bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
@@ -17,16 +41,30 @@ export default function Waitlist() {
           Join the waitlist today.
         </p>
         <br />
+        <div>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="JohnDoe@gmail.com"
-          className="px-4 py-2 rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500  w-full relative z-10 mt-4  bg-neutral-950 placeholder:text-neutral-700"
+          className="px-4 py-2 rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 w-full relative z-10 mt-4 bg-neutral-950 placeholder:text-neutral-700"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
+        <br />
+        <br />
+        <div className="flex justify-center items-center">
+        
+        </div>
+      </form>
+      {message && <p className="flex justify-center items-center">{message}</p>}
+    </div>
+        
+
+      <br />
+      <br />
+      <br />
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
+      
 
       
     </div>
