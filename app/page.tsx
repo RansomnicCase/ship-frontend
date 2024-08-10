@@ -5,6 +5,8 @@ import React from "react";
 import { AuroraBackground } from "./home/components/ui/aurora-background";
 import { useRouter } from "next/navigation";
 import {LinkPreview} from "./home/components/ui/link-preview";
+import { Cover } from "./home/components/ui/cover";
+import { SparklesCore } from "./home/components/ui/sparkles";
 
 export default function LandingPage(): React.JSX.Element {
   const router = useRouter();
@@ -12,7 +14,7 @@ export default function LandingPage(): React.JSX.Element {
   const handleClick = () => {
     router.push("/home");
   };
-  const words = ["cool?", "cute?", "aesthetic?",];
+  const words = ["cool", "cute", "aesthetic",];
 
   return (
     <AuroraBackground>
@@ -26,20 +28,23 @@ export default function LandingPage(): React.JSX.Element {
         }}
         className="relative flex flex-col gap-4 items-center justify-center px-4"
       >
-        <div className="text-3xl md:text-7xl font-bold dark:text-white text-center">
-          You probably clicked on this because I seemed
-          <FlipWords words={words} />
-        </div>
+    <div>
+      <h1 className="text-4xl md:text-4xl lg:text-6xl font-semibold max-w-7xl mx-auto text-center mt-6 relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
+        Meet Garudh; <Cover>Soar</Cover> beyond captchas
+      </h1>
+    </div>
         <div className="font-extralight text-base md:text-4xl dark:text-neutral-200 py-4">
-          Haha, NO.
+          Explore More
         </div>
         <br />
         <br />
+        
         
         
         <LinkPreview url="https://cannizzaro.vercel.app/home" className="font-bold lg:text-2xl text-gray-700">
           get to know me
         </LinkPreview>
+        
           
           
         
