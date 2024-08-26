@@ -6,17 +6,16 @@ export default function HeroSection() {
     <div className="flex flex-col-reverse gap-20 lg:gap-0 lg:flex-row items-center justify-between min-h-[50vh]">
         <div className="space-y-10 text-center lg:text-left">
             <h1 className="text-2xl lg:text-6xl font-bold">
-                Rage, Rage 
-                <br/> <span className="underline underline-offset-8 decoration-red-400">{"against the dying of light"}</span>
+                Generic, very Generic 
+                <br/> <span className="underline underline-offset-8 decoration-red-400">{"shitass of a tagline"}</span>
             </h1>
             <p className="text-lg text-gray-300">
-            तुम जब आओगी तो खोया हुआ पाओगी मुझे,<br />
-            मेरी तन्हाई में ख़्वाबों के सिवा कुछ भी नहीं<br />
-            मेरे कमरे को सजाने की तमन्ना है तुम्हें,<br />
-            मेरे कमरे में किताबों के सिवा कुछ भी नहीं<br />
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Sunt ab ullam distinctio dicta nam, pariatur placeat laudantium cum voluptates a sint, 
+          maiores velit dolorem. Reiciendis officiis praesentium aut natus iusto?
             </p>
             <p className="text-lg text-gray-300">
-            Football, Code, Poetry.
+            we detec, we protec.
             </p>
 
             

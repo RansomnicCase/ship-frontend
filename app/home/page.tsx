@@ -14,6 +14,9 @@ export default function Page(): React.JSX.Element {
   const handleClick = () => {
     router.push("/waitlist");
   };
+  const handleClick2 = () => {
+    router.push("/userform");
+  };
   return (
     <div className="min-h-screen bg-black overflow-hidden dark:bg-black  dark:bg-grid-white/[0.05] bg-grid-black/[0.2]">
       
@@ -47,6 +50,12 @@ export default function Page(): React.JSX.Element {
           onClick={handleClick}
         >
           Join the waitlist
+      </button>
+      <button
+          className="bg-black dark:bg-black rounded-full w-fit text-black dark:text-white px-4 py-2 size-15"
+          onClick={handleClick2}
+        >
+          Try our demo
       </button>
       </div>
       <br />
