@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import {LinkPreview} from "./home/components/ui/link-preview";
 import { Cover } from "./home/components/ui/cover";
 import { SparklesCore } from "./home/components/ui/sparkles";
+import Link from "next/link";
+
 
 export default function LandingPage(): React.JSX.Element {
   const router = useRouter();
@@ -42,9 +44,10 @@ export default function LandingPage(): React.JSX.Element {
         
         
         
-        <LinkPreview url="https://cannizzaro.vercel.app/home" className="font-bold lg:text-2xl text-gray-700">
-          Explore more
-        </LinkPreview>
+         
+         <button className="font-bold lg:text-2xl text-gray-700 explore-more-button">
+              <Link href="/mainpage">Explore More</Link>
+         </button>
         <div onClick={handleClick}>home</div>
         
           
