@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, ReactNode } from "react";
+import React, { useState, ReactNode, ChangeEvent } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "./components/sidebar";
 import {
   IconArrowLeft,
@@ -22,10 +22,48 @@ import { Input } from "../userform/components/ui/input";
 
 
 export default function SidebarDemo() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const [formData, setFormData] = useState({
+    wd_min: '',
+    wwl: '',
+    lwl: '',
+    wvpi: '',
+    ukc: '',
+    dx_min: '',
+    blend: '',
+    nl_c: '',
+    nl_m: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+ 
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted");
-    // Handle form data submission here
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/submit/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await response.json();
+      console.log('Form submitted successfully:', result);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
   };
 
   const links = [
@@ -144,43 +182,43 @@ export default function SidebarDemo() {
 
             <LabelInputContainer>
               <Label htmlFor="WD_min">WD_min</Label>
-              <Input id="WD_min" placeholder="Draft of the vessel [lowLoad, highLoad] " type="text" />
+              <Input id="WD_min" name="wd_min" placeholder="Draft of the vessel [lowLoad, highLoad] " type="text" onChange={handleChange} />
             </LabelInputContainer>
 
             <LabelInputContainer>
               <Label htmlFor="WVPI">WVPI</Label>
-              <Input id="WVPI" placeholder="Weight of the vessel [withLoad, withoutLoad]" type="text" />
+              <Input id="WVPI" name="wvpi" placeholder="Weight of the vessel [withLoad, withoutLoad]" type="text" onChange={handleChange}/>
             </LabelInputContainer>
 
             <LabelInputContainer>
               <Label htmlFor="WWL">WWL</Label>
-              <Input id="WWL" placeholder="Width over water line (in meters)" type="text" />
+              <Input id="WWL" name="wwl" placeholder="Width over water line (in meters)" type="text"  onChange={handleChange}/>
             </LabelInputContainer>
 
             <LabelInputContainer>
               <Label htmlFor="LWL">LWL</Label>
-              <Input id="LWL" placeholder="Length over water line (in meters)" type="text" />
+              <Input id="LWL" name="lwl" placeholder="Length over water line (in meters)" type="text" onChange={handleChange} />
             </LabelInputContainer>
 
             <LabelInputContainer>
               <Label htmlFor="ukc">UKC</Label>
-              <Input id="ukc" placeholder="Under keel clearance (in meters)" type="text" />
+              <Input id="ukc" name="ukc" placeholder="Under keel clearance (in meters)" type="text" onChange={handleChange} />
             </LabelInputContainer>
 
             <LabelInputContainer>
               <Label htmlFor="dx_min">dx_min</Label>
-              <Input id="dx_min" placeholder="Minimal spatial resolution" type="text" />
+              <Input id="dx_min" name="dx_min" placeholder="Minimal spatial resolution" type="text"  onChange={handleChange}/>
             </LabelInputContainer>
 
             <LabelInputContainer>
               <Label htmlFor="blend">Blend Factor</Label>
-              <Input id="blend" placeholder="Blend factor" type="text" />
+              <Input id="blend" name="blend" placeholder="Blend factor" type="text" onChange={handleChange}/>
             </LabelInputContainer>
 
             <LabelInputContainer>
               <Label htmlFor="nl_c">Non-linearity Factor (nl_c, nl_m)</Label>
-              <Input id="nl_c" placeholder="nl_c" type="text" />
-              <Input id="nl_m" placeholder="nl_m" type="text" />
+              <Input id="nl_c"  name = "nl_c" placeholder="nl_c" type="text" onChange={handleChange} />
+              <Input id="nl_m" name="nl_m" placeholder="nl_m" type="text" onChange={handleChange}/>
             </LabelInputContainer>
 
             <button

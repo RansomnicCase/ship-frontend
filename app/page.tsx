@@ -46,7 +46,7 @@ export default function LandingPage(): React.JSX.Element {
         
          
          <button className="font-bold lg:text-2xl text-gray-700 explore-more-button">
-              <Link href="/mainpage">Explore More</Link>
+              <Link href="/animatedmodaldemo">Explore More</Link>
          </button>
         <div onClick={handleClick}>home</div>
         
