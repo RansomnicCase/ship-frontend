@@ -2,6 +2,8 @@ import Image from 'next/image';
 import React from 'react';
 import { TracingBeam } from './components/tracing-beam';
 import { BackgroundBeams } from './components/background-beams';
+import Link from "next/link";
+
 
 export default function InformationPage() {
     return (
@@ -182,7 +184,9 @@ export default function InformationPage() {
             
             <br></br>
             
-            
+            <button className="px-6 py-3 font-bold text-white bg-black-600 rounded-lg hover:bg-grey-700 lg:text-2xl text-gray-700 explore-more-button transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
+                <Link href="/dashboard">Go Back</Link>
+            </button>
             
 
 

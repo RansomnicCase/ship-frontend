@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, ReactNode, ChangeEvent } from "react";
+import React, { useState, ReactNode, useEffect } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "./components/sidebar";
 import {
   IconArrowLeft,
@@ -11,19 +11,36 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import {
-  IconBrandGithub,
-  IconBrandGoogle,
-  IconBrandDiscord,
-} from "@tabler/icons-react";
 import { Label } from "../userform/components/ui/label";
 import { Input } from "../userform/components/ui/input";
-
-
+import axios from "axios";
+import { Meteors } from "./information/components/meteors";
 
 export default function SidebarDemo() {
+  const [imageUrl, setImageUrl] = useState('');
+
+  useEffect(() => {
+    const fetchImageUrl = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/plotimage/", {
+          responseType: 'blob'
+        });
+        const imageUrl = URL.createObjectURL(response.data);
+        setImageUrl(imageUrl);
+      } catch (error) {
+        console.error('Error fetching image', error);
+      }
+    };
+    fetchImageUrl();
+  }, []);
+
+  const [open, setOpen] = useState(false);
+
+  
 
   const [formData, setFormData] = useState({
+    start: '',
+    stop: '',
     wd_min: '',
     wwl: '',
     lwl: '',
@@ -35,14 +52,16 @@ export default function SidebarDemo() {
     nl_m: ''
   });
 
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
- 
+
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -104,8 +123,6 @@ export default function SidebarDemo() {
     },
   ];
 
-  const [open, setOpen] = useState(false);
-
   return (
     <div className="flex h-screen w-screen overflow-hidden">
       <Sidebar open={open} setOpen={setOpen}>
@@ -121,11 +138,11 @@ export default function SidebarDemo() {
           <div>
             <SidebarLink
               link={{
-                label: "GANG",
+                label: "Athree50",
                 href: "#",
                 icon: (
                   <Image
-                    src="/hero.jpg"
+                    src="/images/shipicon.png"
                     className="h-7 w-7 flex-shrink-0 rounded-full"
                     width={50}
                     height={50}
@@ -137,21 +154,67 @@ export default function SidebarDemo() {
           </div>
         </SidebarBody>
       </Sidebar>
+
       <div className="w-3/5 p-4 bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
         <div className="w-3/4 h-3/4 relative">
-        <Image 
-                    src="/images/maproute.jpeg" 
-                    alt="Beautiful landscape" 
-                    width={800} 
-                    height={600} 
-                    className="rounded-lg"
-                />
+{/*         <p>"Patience, our team is working round the clock to make this work!"</p>
+ */}          <Image
+            src={imageUrl}
+            alt="Patience, our team is working round the clock to make this work!"
+            width={800}
+            height={600}
+            className="rounded-lg"
+          />
         </div>
       </div>
 
+      <div className="flex items-middle justify-center min-h-screen">
+        <div className="relative w-full max-w-xs">
+          <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 transform scale-[0.80] rounded-full blur-3xl" />
+          <div className="relative shadow-xl bg-gray-900 border border-gray-800 px-4 py-8 overflow-hidden rounded-2xl flex flex-col justify-end items-start">
+            <div className="h-5 w-5 rounded-full border flex items-center justify-center mb-4 border-gray-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="h-2 w-2 text-gray-300"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4.5 4.5l15 15m0 0V8.25m0 11.25H8.25"
+                />
+              </svg>
+            </div>
+
+            <h1 className="font-bold text-xl text-white mb-4 relative z-50">
+              Confused by the terms?
+            </h1>
+
+            <p className="font-normal text-base text-slate-500 mb-4 relative z-50">
+              Dive into the information page and get all the info you need!
+            </p>
+
+            <Link
+  href="/dashboard/information"
+  className="border px-4 py-1 rounded-lg border-gray-500 text-gray-300"
+>
+  Explore
+</Link>
+
+            <Meteors number={20} />
+          </div>
+        </div>
+      </div>
+
+  
+
+
       {/* Right side for the form */}
       <div className="w-2/5 flex items-center justify-center bg-white dark:bg-black p-8">
-        <div className="w-full max-w-md">
+          <div className="w-full max-w-md">
           <h2 className="font-bold text-2xl text-neutral-800 dark:text-neutral-200 mb-2">
             Welcome to Rahguzar
           </h2>
@@ -160,44 +223,34 @@ export default function SidebarDemo() {
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="flex space-x-4">
-              {/* <LabelInputContainer className="w-1/2">
-                <select id="ship" className="w-full">
-                  <option value="">Select a ship</option>
-                  <option value="ship1">ship1</option>
-                  <option value="ship2">ship2</option>
-                  <option value="ship3">ship3</option>
-                </select>
-              </LabelInputContainer> */}
-              
-            </div>
-            <Link href="/dashboard/information">
-              <button
-              className="w-full bg-black text-white rounded-md py-2 font-medium hover:bg-gray-800 transition-colors"
-              type="button">
-  
-              Get Information about parameters
-              </button>
-            </Link>
-
             <LabelInputContainer>
-              <Label htmlFor="WD_min">WD_min</Label>
-              <Input id="WD_min" name="wd_min" placeholder="Draft of the vessel [lowLoad, highLoad] " type="text" onChange={handleChange} />
+              <Label htmlFor="start">Start</Label>
+              <Input id="start" name="start" placeholder="Your Starting Location [,]" type="text" onChange={handleChange} />
             </LabelInputContainer>
 
             <LabelInputContainer>
-              <Label htmlFor="WVPI">WVPI</Label>
-              <Input id="WVPI" name="wvpi" placeholder="Weight of the vessel [withLoad, withoutLoad]" type="text" onChange={handleChange}/>
+              <Label htmlFor="stop">Stop</Label>
+              <Input id="stop" name="stop" placeholder="Your Destination" type="text" onChange={handleChange} />
             </LabelInputContainer>
 
             <LabelInputContainer>
-              <Label htmlFor="WWL">WWL</Label>
-              <Input id="WWL" name="wwl" placeholder="Width over water line (in meters)" type="text"  onChange={handleChange}/>
+              <Label htmlFor="wd_min">WD_min</Label>
+              <Input id="wd_min" name="wd_min" placeholder="Draft of the vessel [lowLoad, highLoad]" type="text" onChange={handleChange} />
             </LabelInputContainer>
 
             <LabelInputContainer>
-              <Label htmlFor="LWL">LWL</Label>
-              <Input id="LWL" name="lwl" placeholder="Length over water line (in meters)" type="text" onChange={handleChange} />
+              <Label htmlFor="wvpi">WVPI</Label>
+              <Input id="wvpi" name="wvpi" placeholder="Weight of the vessel [withLoad, withoutLoad]" type="text" onChange={handleChange} />
+            </LabelInputContainer>
+
+            <LabelInputContainer>
+              <Label htmlFor="wwl">WWL</Label>
+              <Input id="wwl" name="wwl" placeholder="Width over water line (in meters)" type="text" onChange={handleChange} />
+            </LabelInputContainer>
+
+            <LabelInputContainer>
+              <Label htmlFor="lwl">LWL</Label>
+              <Input id="lwl" name="lwl" placeholder="Length over water line (in meters)" type="text" onChange={handleChange} />
             </LabelInputContainer>
 
             <LabelInputContainer>
@@ -207,18 +260,18 @@ export default function SidebarDemo() {
 
             <LabelInputContainer>
               <Label htmlFor="dx_min">dx_min</Label>
-              <Input id="dx_min" name="dx_min" placeholder="Minimal spatial resolution" type="text"  onChange={handleChange}/>
+              <Input id="dx_min" name="dx_min" placeholder="Minimal spatial resolution" type="text" onChange={handleChange} />
             </LabelInputContainer>
 
             <LabelInputContainer>
               <Label htmlFor="blend">Blend Factor</Label>
-              <Input id="blend" name="blend" placeholder="Blend factor" type="text" onChange={handleChange}/>
+              <Input id="blend" name="blend" placeholder="Blend factor" type="text" onChange={handleChange} />
             </LabelInputContainer>
 
             <LabelInputContainer>
               <Label htmlFor="nl_c">Non-linearity Factor (nl_c, nl_m)</Label>
-              <Input id="nl_c"  name = "nl_c" placeholder="nl_c" type="text" onChange={handleChange} />
-              <Input id="nl_m" name="nl_m" placeholder="nl_m" type="text" onChange={handleChange}/>
+              <Input id="nl_c" name="nl_c" placeholder="nl_c" type="text" onChange={handleChange} />
+              <Input id="nl_m" name="nl_m" placeholder="nl_m" type="text" onChange={handleChange} />
             </LabelInputContainer>
 
             <button
@@ -227,7 +280,6 @@ export default function SidebarDemo() {
             >
               Submit →
             </button>
-            
           </form>
         </div>
       </div>
@@ -254,69 +306,22 @@ export const Logo = () => {
   return (
     <Link
       href="#"
-      className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
+      className="font-normal flex space-x-3 items-center text-xl"
     >
-      <div className="h-5 w-6 bg-black dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="font-medium text-black dark:text-white whitespace-pre"
-      >
-        A350
-      </motion.span>
+      <IconBrandTabler />
+      <span>RahGuzar</span>
     </Link>
   );
 };
 
 export const LogoIcon = () => {
   return (
-    <Link
-      href="#"
-      className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
-    >
-      <div className="h-5 w-6 bg-black dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
+    <Link href="#" className="flex justify-center">
+      <IconBrandTabler />
     </Link>
   );
 };
 
-const BottomGradient = () => {
-  return (
-    <>
-      <span className="group-hover/btn:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
-      <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
-    </>
-  );
-};
-
-const LabelInputContainer = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
-  return (
-    <div className={cn("flex flex-col space-y-2", className)}>
-      {children}
-    </div>
-  );
-};
-
-const Highlight = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
-  return (
-    <span
-      className={cn(
-        "text-black dark:text-neutral-200 font-semibold",
-        className
-      )}
-    >
-      {children}
-    </span>
-  );
-};
+const LabelInputContainer: React.FC<{ children: ReactNode }> = ({ children }) => (
+  <div className="space-y-1">{children}</div>
+);

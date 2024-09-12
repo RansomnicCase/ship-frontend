@@ -15,6 +15,12 @@ import { useRouter } from "next/navigation";
 export default function AnimatedModalDemo() {
   const router = useRouter();
 
+
+  const handleLoginClick = () => {
+    // Add your login logic or redirect here
+    router.push("/login"); // Replace this with the actual login route
+  };
+
   const images = [
     "/images/shipdraft.jpg",
     "/images/shipweight.webp",
@@ -33,6 +39,14 @@ export default function AnimatedModalDemo() {
 
   return (
     <div className="py-40 flex items-center justify-center">
+        <div className="absolute top-4 right-4">
+        <button
+          onClick={handleLoginClick}
+          className="bg-black text-white py-2 px-4 rounded"
+        >
+          Login
+        </button>
+      </div>
       <Modal>
         <ModalTrigger className="bg-black dark:bg-white dark:text-black text-white flex justify-center group/modal-btn">
           <span className="group-hover/modal-btn:translate-x-40 text-center transition duration-500">
