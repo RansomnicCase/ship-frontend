@@ -20,7 +20,7 @@ import axios from "axios";
 import { Meteors } from "./information/components/meteors";
 import { Logo, LogoIcon, SocialButton, LabelInputContainer } from "./components/Logo";
 
-export default function SidebarDemo() {
+export default function DashboardPage() {
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
