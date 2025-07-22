@@ -27,18 +27,18 @@ export default function InformationPage() {
                 WD_min is the minimum water depth needed to ensure safe navigation and operation of a vessel, taking into account its draft and other factors.
             </p>
             <p className="mb-6 text-lg text-gray-300">
-            The draft of a vessel is the vertical distance between the waterline and the bottom of the hull. WD_min must always be greater than the vessel's draft to prevent grounding.
+            The draft of a vessel is the vertical distance between the waterline and the bottom of the hull. WD_min must always be greater than the vessel&apos;s draft to prevent grounding.
             </p>
             <p className="mb-6 text-lg text-gray-300">
             WD_min is typically calculated as the sum of:
-            Vessel's draft + Under-keel clearance + Safety margin.
+            Vessel&apos;s draft + Under-keel clearance + Safety margin.
 
             </p>
             <p className="mb-6 text-lg text-gray-300">
             In some advanced navigation systems, WD_min might be calculated dynamically, taking into account real-time factors like tides, waves, and vessel characteristics.
             </p>
             <p className="text-lg text-gray-300">
-            WD_min usually includes a safety margin beyond the vessel's draft to account for factors like:
+            WD_min usually includes a safety margin beyond the vessel&apos;s draft to account for factors like:
 
             Wave action
             Squat effect (the tendency for a vessel to sink deeper in shallow water)
